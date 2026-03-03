@@ -47,7 +47,7 @@ export default function Booking() {
 
       </section>
 
-      {/* FORM SECTION */}
+      {/* FORM SECTION - CHANGED*/}
       <section className="px-6 md:px-16 pb-24">
 
         <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-xl p-8 md:p-12">
