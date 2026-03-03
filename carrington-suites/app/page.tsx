@@ -4,16 +4,15 @@ export default function Home() {
 
       {/* ================= HERO SECTION ================= */}
       <section
-        className="min-h-screen flex items-center justify-center relative px-6"
+        className="min-h-screen flex items-center justify-center relative px-6 bg-cover bg-center"
         style={{
-          backgroundImage: "url('/room1.jpg')",
+          backgroundImage: "url('/hero-main.png')",
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80"></div>
 
-        <div className="relative text-center text-white max-w-4xl px-6 md:px-12 flex flex-col items-center justify-center">
-
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-tight tracking-tight mb-6">
+        <div className="relative text-center text-white max-w-4xl px-6 md:px-12">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-tight mb-6">
             Luxury 3-Bedroom Executive Residences
           </h1>
 
@@ -27,24 +26,35 @@ export default function Home() {
           >
             RESERVE YOUR STAY
           </a>
-
         </div>
       </section>
 
 
-      {/* ================= ABOUT SECTION ================= */}
-      <section className="py-16 sm:py-20 lg:py-32 px-6 md:px-16 bg-white text-center">
+      {/* ================= ABOUT SECTION WITH IMAGE ================= */}
+      <section className="py-20 lg:py-32 px-6 md:px-16 bg-white">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
 
-        <h2 className="text-3xl md:text-5xl font-semibold mb-8 text-[#0B2C5F]">
-          Experience Refined Comfort
-        </h2>
+          <div>
+            <h2 className="text-3xl md:text-5xl font-semibold mb-8 text-[#0B2C5F]">
+              Experience Refined Comfort
+            </h2>
 
-        <p className="max-w-3xl mx-auto text-base md:text-lg text-gray-800 leading-relaxed">
-          The Carrington Suites offers a premium short-stay experience
-          designed for executives and travelers seeking elegance,
-          privacy, and comfort in the heart of Victoria Island.
-        </p>
+            <p className="text-base md:text-lg text-gray-800 leading-relaxed">
+              The Carrington Suites offers a premium short-stay experience
+              designed for executives and travelers seeking elegance,
+              privacy, and comfort in the heart of Victoria Island.
+            </p>
+          </div>
 
+          <div>
+            <img
+              src="/living-1.png"
+              alt="Luxury Living Room"
+              className="rounded-xl shadow-2xl"
+            />
+          </div>
+
+        </div>
       </section>
 
 
@@ -58,23 +68,33 @@ export default function Home() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
 
           {[
-            { name: "Executive 3-Bedroom Suite", price: "₦300,000 / Night" },
-            { name: "Premium 3-Bedroom Suite", price: "₦450,000 / Night" },
-            { name: "Signature 3-Bedroom Residence", price: "₦600,000 / Night" },
+            {
+              name: "Executive 3-Bedroom Suite",
+              price: "₦300,000 / Night",
+              image: "/suite-modern-1.png",
+            },
+            {
+              name: "Premium 3-Bedroom Suite",
+              price: "₦450,000 / Night",
+              image: "/suite-dark-1.png",
+            },
+            {
+              name: "Signature 3-Bedroom Residence",
+              price: "₦600,000 / Night",
+              image: "/suite-wood-1.png",
+            },
           ].map((apt, index) => (
             <div
               key={index}
               className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition duration-300"
             >
-
               <img
-                src="/room1.jpg"
+                src={apt.image}
                 className="h-64 w-full object-cover"
                 alt={apt.name}
               />
 
-              <div className="p-8 text-center md:text-left">
-
+              <div className="p-8">
                 <h3 className="text-xl md:text-2xl font-semibold mb-3 text-[#0B2C5F]">
                   {apt.name}
                 </h3>
@@ -89,13 +109,20 @@ export default function Home() {
                 >
                   BOOK NOW
                 </a>
-
               </div>
-
             </div>
           ))}
 
         </div>
+      </section>
+
+
+      {/* ================= LIFESTYLE IMAGE STRIP ================= */}
+      <section className="grid md:grid-cols-3">
+
+        <img src="/balcony-1.png" className="h-80 w-full object-cover" />
+        <img src="/tv-wall.png" className="h-80 w-full object-cover" />
+        <img src="/suite-wood-2.png" className="h-80 w-full object-cover" />
 
       </section>
 
@@ -126,11 +153,10 @@ export default function Home() {
           ))}
 
         </div>
-
       </section>
 
 
-      {/* ================= CALL TO ACTION ================= */}
+      {/* ================= CTA ================= */}
       <section className="py-20 md:py-28 text-center bg-[#0B2C5F] text-white px-6">
 
         <h2 className="text-3xl md:text-5xl mb-8 font-semibold">
