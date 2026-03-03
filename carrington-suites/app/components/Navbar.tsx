@@ -7,22 +7,24 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed w-full z-50 bg-white/70 backdrop-blur-md border-b border-gray-200">
+    <nav className="fixed top-0 w-full z-50 bg-white lg:bg-white/80 lg:backdrop-blur-md border-b border-gray-200">
 
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 md:px-10 py-4">
+      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 sm:px-8 lg:px-10 py-4">
 
-        <Link href="/">
+        {/* LOGO */}
+        <Link href="/" className="flex items-center">
           <Image
             src="/logo.png"
             alt="Carrington Suites"
-            width={200}
-            height={80}
-            className="w-40 md:w-auto"
+            width={220}
+            height={90}
+            className="w-36 sm:w-40 lg:w-auto"
+            priority
           />
         </Link>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex gap-10 font-medium text-sm tracking-wide items-center">
+        {/* DESKTOP MENU (Large screens only) */}
+        <div className="hidden lg:flex gap-10 font-medium text-sm tracking-wide items-center text-[#0B2C5F]">
 
           <Link href="/" className="hover:text-[#C6A85B] transition">
             HOME
@@ -38,31 +40,57 @@ export default function Navbar() {
 
           <Link
             href="/booking"
-            className="bg-[#0B2C5F] text-white px-5 py-2 hover:bg-[#C6A85B] transition"
+            className="bg-[#0B2C5F] text-white px-6 py-2 hover:bg-[#C6A85B] transition"
           >
             BOOK NOW
           </Link>
 
         </div>
 
-        {/* Mobile Hamburger */}
+        {/* HAMBURGER (Mobile + Tablet) */}
         <button
-          className="md:hidden text-2xl"
+          className="lg:hidden text-3xl text-[#0B2C5F] focus:outline-none"
           onClick={() => setOpen(!open)}
+          aria-label="Toggle Menu"
         >
           ☰
         </button>
 
       </div>
 
-      {/* Mobile Dropdown */}
+      {/* MOBILE + TABLET DROPDOWN */}
       {open && (
-        <div className="md:hidden bg-white shadow-lg px-6 py-6 space-y-4 text-center">
+        <div className="lg:hidden bg-white shadow-xl border-t border-gray-200 px-6 sm:px-10 py-8 space-y-6 text-center">
 
-          <Link href="/" onClick={() => setOpen(false)}>HOME</Link>
-          <Link href="/apartments" onClick={() => setOpen(false)}>APARTMENTS</Link>
-          <Link href="/contact" onClick={() => setOpen(false)}>CONTACT</Link>
-          <Link href="/booking" onClick={() => setOpen(false)} className="block bg-[#0B2C5F] text-white py-2 mt-4">
+          <Link
+            href="/"
+            onClick={() => setOpen(false)}
+            className="block text-[#0B2C5F] font-semibold text-lg"
+          >
+            HOME
+          </Link>
+
+          <Link
+            href="/apartments"
+            onClick={() => setOpen(false)}
+            className="block text-[#0B2C5F] font-semibold text-lg"
+          >
+            APARTMENTS
+          </Link>
+
+          <Link
+            href="/contact"
+            onClick={() => setOpen(false)}
+            className="block text-[#0B2C5F] font-semibold text-lg"
+          >
+            CONTACT
+          </Link>
+
+          <Link
+            href="/booking"
+            onClick={() => setOpen(false)}
+            className="block bg-[#0B2C5F] text-white py-3 mt-4 font-medium"
+          >
             BOOK NOW
           </Link>
 
