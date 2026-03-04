@@ -44,6 +44,9 @@ export default function Navbar() {
           <Link href="/apartments" className="hover:text-[#C6A85B] transition">
             APARTMENTS
           </Link>
+          <Link href="/gallery" className="hover:text-[#C6A85B] transition">
+            GALLERY
+          </Link>
           <Link href="/contact" className="hover:text-[#C6A85B] transition">
             CONTACT
           </Link>
@@ -102,6 +105,12 @@ export default function Navbar() {
           >
             APARTMENTS
           </Link>
+
+          <Link 
+            href="/gallery"  onClick={() => setOpen(false)}
+            className="block text-[#0B2C5F] font-semibold text-xl">
+            GALLERY
+        </Link>
 
           <Link
             href="/contact"
