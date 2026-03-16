@@ -7,6 +7,7 @@ import Link from "next/link";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [resOpen, setResOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,7 +30,6 @@ export default function Navbar() {
 
         {/* LOGO */}
         <Link href="/" className="flex items-center">
-
           <Image
             src="/logo.png"
             alt="Carrington Suites"
@@ -40,7 +40,6 @@ export default function Navbar() {
               scrolled ? "w-40 md:w-44" : "w-48 md:w-56"
             }`}
           />
-
         </Link>
 
 
@@ -54,12 +53,44 @@ export default function Navbar() {
             HOME
           </Link>
 
-          <Link
-            href="/apartments"
-            className="hover:text-[#3F6A64] transition duration-300"
-          >
-            RESIDENCES
-          </Link>
+
+          {/* RESIDENCES DROPDOWN */}
+          <div className="relative group">
+
+            <Link
+              href="/apartments"
+              className="hover:text-[#3F6A64] transition duration-300"
+            >
+              RESIDENCES
+            </Link>
+
+            <div className="absolute left-0 top-full mt-4 hidden group-hover:block bg-white shadow-xl rounded-lg overflow-hidden min-w-[220px] border">
+
+              <Link
+                href="/apartments/executive"
+                className="block px-6 py-3 text-sm hover:bg-gray-50"
+              >
+                Executive Residence
+              </Link>
+
+              <Link
+                href="/apartments/premium"
+                className="block px-6 py-3 text-sm hover:bg-gray-50"
+              >
+                Premium Residence
+              </Link>
+
+              <Link
+                href="/apartments/signature"
+                className="block px-6 py-3 text-sm hover:bg-gray-50"
+              >
+                Signature Residence
+              </Link>
+
+            </div>
+
+          </div>
+
 
           <Link
             href="/gallery"
@@ -118,7 +149,7 @@ export default function Navbar() {
       {/* MOBILE MENU */}
       <div
         className={`lg:hidden transition-all duration-500 overflow-hidden ${
-          open ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
+          open ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
 
@@ -132,13 +163,49 @@ export default function Navbar() {
             Home
           </Link>
 
-          <Link
-            href="/apartments"
-            onClick={() => setOpen(false)}
-            className="block text-xl font-medium text-[#0B2C5F]"
-          >
-            Residences
-          </Link>
+
+          {/* MOBILE RESIDENCES SUBMENU */}
+          <div>
+
+            <button
+              onClick={() => setResOpen(!resOpen)}
+              className="block w-full text-xl font-medium text-[#0B2C5F]"
+            >
+              Residences
+            </button>
+
+            {resOpen && (
+              <div className="mt-4 space-y-4 text-lg text-gray-700">
+
+                <Link
+                  href="/apartments/executive"
+                  onClick={() => setOpen(false)}
+                  className="block"
+                >
+                  Executive Residence
+                </Link>
+
+                <Link
+                  href="/apartments/premium"
+                  onClick={() => setOpen(false)}
+                  className="block"
+                >
+                  Premium Residence
+                </Link>
+
+                <Link
+                  href="/apartments/signature"
+                  onClick={() => setOpen(false)}
+                  className="block"
+                >
+                  Signature Residence
+                </Link>
+
+              </div>
+            )}
+
+          </div>
+
 
           <Link
             href="/gallery"
@@ -167,6 +234,7 @@ export default function Navbar() {
         </div>
 
       </div>
+
     </nav>
   );
 }
