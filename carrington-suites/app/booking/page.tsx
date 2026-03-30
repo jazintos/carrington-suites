@@ -11,20 +11,29 @@ export default function Booking() {
     const formData = new FormData(e.target);
 
     try {
-      const response = await fetch(
-        "https://formsubmit.co/ajax/timi@spectrometerltd.com",
-        {
-          method: "POST",
-          headers: { Accept: "application/json" },
-          body: formData,
-        }
-      );
+      const response = await fetch("/api/bookings/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          email: formData.get("email"),
+          phone: formData.get("phone"),
+          apartment: formData.get("apartment"),
+          checkin: formData.get("checkin"),
+          checkout: formData.get("checkout"),
+          notes: formData.get("notes"),
+        }),
+      });
+
+      const data = await response.json();
 
       if (response.ok) {
-        setStatus("Booking request sent successfully. We will contact you shortly.");
+        setStatus(`Booking received. Ref: ${data.bookingReference}`);
         e.target.reset();
       } else {
-        setStatus("Something went wrong. Please try again.");
+        setStatus(data.error || "Something went wrong.");
       }
     } catch {
       setStatus("Network error. Please try again.");
@@ -135,10 +144,10 @@ export default function Booking() {
                   required
                   className="w-full border border-gray-400 px-4 py-3 bg-white focus:outline-none focus:border-[#C6A85B] focus:ring-1 focus:ring-[#C6A85B]"
                 >
-                  <option value="">Select Apartment Type</option>
-                  <option>Executive 3-Bedroom Suite</option>
-                  <option>Premium 3-Bedroom Suite</option>
-                  <option>Signature 3-Bedroom Residence</option>
+                  <option value="">Select  Type</option>
+                  <option value="Executive">Executive</option>
+                  <option value="Premium">Premium</option>
+                  <option value="Signature">Signature</option>
                 </select>
               </div>
 
