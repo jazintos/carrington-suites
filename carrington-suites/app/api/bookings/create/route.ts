@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -76,7 +76,6 @@ export async function POST(req: Request) {
       }
     }
 
-    // ================= NO AVAILABILITY =================
     if (!availableUnit) {
       return NextResponse.json(
         { error: "No available units for selected dates." },
@@ -84,12 +83,14 @@ export async function POST(req: Request) {
       );
     }
 
-    // ================= CALCULATE NIGHTS =================
+    // ================= CALCULATE =================
     const nights =
       (checkOutDate.getTime() - checkInDate.getTime()) /
       (1000 * 60 * 60 * 24);
 
     const totalPrice = nights * apartmentType.price;
+
+    console.log("TOTAL PRICE:", totalPrice); // DEBUG
 
     // ================= CREATE BOOKING =================
     const booking = await prisma.booking.create({
@@ -102,6 +103,8 @@ export async function POST(req: Request) {
         checkIn: checkInDate,
         checkOut: checkOutDate,
         nights,
+        totalPrice, // 🔥 FIXED
+        status: "PENDING", // 🔥 IMPORTANT
         notes,
       },
     });

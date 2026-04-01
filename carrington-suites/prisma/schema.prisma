@@ -25,21 +25,29 @@ model Unit {
 }
 
 model Booking {
-  id        Int      @id @default(autoincrement())
-  reference String   @unique
-  name      String
-  email     String
-  phone     String
+  id          Int      @id @default(autoincrement())
+  reference   String   @unique
+  name        String
+  email       String
+  phone       String
 
-  unitId    Int
-  unit      Unit     @relation(fields: [unitId], references: [id])
+  unitId      Int
+  unit        Unit     @relation(fields: [unitId], references: [id])
 
-  checkIn   DateTime
-  checkOut  DateTime
-  nights    Int
+  checkIn     DateTime
+  checkOut    DateTime
+  nights      Int
 
-  notes     String?
-  status    String   @default("Pending")
+  totalPrice  Int      @default(0)
 
-  createdAt DateTime @default(now())
+  notes       String?
+
+  status      String   @default("PENDING")
+
+  // ✅ NEW FIELDS
+  paidAt      DateTime?
+  paymentData String?
+  updatedAt   DateTime @updatedAt
+
+  createdAt   DateTime @default(now())
 }

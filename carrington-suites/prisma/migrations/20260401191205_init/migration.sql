@@ -26,8 +26,12 @@ CREATE TABLE "Booking" (
     "checkIn" DATETIME NOT NULL,
     "checkOut" DATETIME NOT NULL,
     "nights" INTEGER NOT NULL,
+    "totalPrice" INTEGER NOT NULL DEFAULT 0,
     "notes" TEXT,
-    "status" TEXT NOT NULL DEFAULT 'Pending',
+    "status" TEXT NOT NULL DEFAULT 'PENDING',
+    "paidAt" DATETIME,
+    "paymentData" TEXT,
+    "updatedAt" DATETIME NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT "Booking_unitId_fkey" FOREIGN KEY ("unitId") REFERENCES "Unit" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
