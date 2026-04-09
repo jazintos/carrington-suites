@@ -221,9 +221,10 @@ export default function Booking() {
 
                     console.log("FRONTEND RESPONSE:", data);
 
-                    if (data.authorization_url) {
-                      window.location.href = data.authorization_url;
+                    if (data.authorization_url || data.paymentUrl) {
+                      window.location.href = data.authorization_url || data.paymentUrl;
                     } else {
+                      console.error("INIT ERROR:", data);
                       alert("Payment failed");
                     }
                   }}
