@@ -1,8 +1,9 @@
+export const dynamic = "force-dynamic";
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  console.log("DB URL:", process.env.DATABASE_URL); // 👈 ADD THIS
+
   try {
     const body = await req.json();
 
