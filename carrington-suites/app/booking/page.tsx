@@ -219,6 +219,8 @@ export default function Booking() {
 
                     const data = await res.json();
 
+                    console.log("FRONTEND RESPONSE:", data);
+
                     if (data.authorization_url) {
                       window.location.href = data.authorization_url;
                     } else {
