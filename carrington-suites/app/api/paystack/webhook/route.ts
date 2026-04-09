@@ -1,26 +1,34 @@
+export const dynamic = "force-dynamic";
+
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import crypto from "crypto";
 
 export async function POST(req: Request) {
-  const rawBody = await req.text(); // IMPORTANT: raw body
+  const rawBody = await req.text();
   const signature = (await headers()).get("x-paystack-signature");
 
-  // Generate hash
+  const secret = process.env.PAYSTACK_SECRET_KEY;
+
+  if (!secret) {
+    return NextResponse.json(
+      { error: "Missing Paystack secret" },
+      { status: 500 }
+    );
+  }
+
   const hash = crypto
-    .createHmac("sha512", process.env.PAYSTACK_SECRET_KEY!)
+    .createHmac("sha512", secret)
     .update(rawBody)
     .digest("hex");
 
-  // 🔐 Verify request is from Paystack
   if (hash !== signature) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
   }
 
   const event = JSON.parse(rawBody);
 
-  // Only handle successful payments
   if (event.event === "charge.success") {
     const payment = event.data;
     const reference = payment.reference;
@@ -29,11 +37,8 @@ export async function POST(req: Request) {
       where: { reference },
     });
 
-    if (!booking) {
-      return NextResponse.json({ ok: true });
-    }
+    if (!booking) return NextResponse.json({ ok: true });
 
-    // 🧠 Prevent duplicate processing
     if (booking.status === "CONFIRMED") {
       return NextResponse.json({ ok: true });
     }
@@ -46,7 +51,7 @@ export async function POST(req: Request) {
         data: {
           status: "CONFIRMED",
           paidAt: new Date(),
-          paymentData: payment,
+          paymentData: JSON.stringify(payment),
         },
       });
     } else {
@@ -54,7 +59,7 @@ export async function POST(req: Request) {
         where: { reference },
         data: {
           status: "FAILED",
-          paymentData: payment,
+          paymentData: JSON.stringify(payment),
         },
       });
     }
