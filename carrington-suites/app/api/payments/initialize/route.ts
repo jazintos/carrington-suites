@@ -55,6 +55,9 @@ export async function POST(req: Request) {
 
     const data = await paystackRes.json();
 
+    console.log("PAYSTACK INIT RESPONSE:", data);
+    console.log("AUTH URL:", data?.data?.authorization_url);
+
     if (!data.status) {
       return NextResponse.json(
         { error: "Payment initialization failed" },
