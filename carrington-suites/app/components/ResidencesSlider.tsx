@@ -6,17 +6,20 @@ const residences = [
   {
     name: "Executive Residence",
     price: "₦300,000 / Night",
-    image: "/suite-modern-1.png"
+    image: "/suite-modern-1.png",
+    link: "/apartments/executive"
   },
   {
     name: "Premium Residence",
     price: "₦450,000 / Night",
-    image: "/suite-dark-1.png"
+    image: "/suite-dark-1.png",
+    link: "/apartments/premium"
   },
   {
     name: "Signature Residence",
     price: "₦600,000 / Night",
-    image: "/suite-wood-1.png"
+    image: "/suite-wood-1.png",
+    link: "/apartments/signature"
   }
 ];
 

@@ -4,14 +4,23 @@ const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
 
-// 🔥 Force runtime env usage (critical fix)
-const databaseUrl = process.env.DATABASE_URL;
+// 🔥 Force correct runtime DB (ignore bad env like file.db)
+const rawUrl = process.env.DATABASE_URL;
 
-// Optional but VERY useful for debugging (remove later)
+const databaseUrl =
+  rawUrl && rawUrl.startsWith("postgres")
+    ? rawUrl
+    : undefined;
+
+// 🚨 Debug (you can remove later)
 console.log("=== PRISMA INIT DEBUG ===");
-console.log("DATABASE_URL:", databaseUrl);
-console.log("Starts with postgres:", databaseUrl?.startsWith("postgres"));
+console.log("RAW DATABASE_URL:", rawUrl);
+console.log("FINAL DATABASE_URL:", databaseUrl);
 console.log("=========================");
+
+if (!databaseUrl) {
+  throw new Error("❌ DATABASE_URL is missing or invalid in Vercel");
+}
 
 const prisma =
   globalForPrisma.prisma ??
