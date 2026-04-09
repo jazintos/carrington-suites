@@ -219,8 +219,8 @@ export default function Booking() {
 
                     const data = await res.json();
 
-                    if (data.paymentUrl) {
-                      window.location.href = data.paymentUrl;
+                    if (data.authorization_url) {
+                      window.location.href = data.authorization_url;
                     } else {
                       alert("Payment failed");
                     }
