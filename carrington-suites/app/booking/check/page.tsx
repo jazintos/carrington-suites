@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import jsPDF from "jspdf";
 import { QRCodeSVG } from "qrcode.react";
+import { Suspense } from "react";
 
-export default function CheckBookingPage() {
+function CheckBookingContent() {
   const [reference, setReference] = useState("");
   const [booking, setBooking] = useState<any>(null);
   const [error, setError] = useState("");
@@ -193,3 +194,11 @@ export default function CheckBookingPage() {
     </div>
   );
 }
+
+export default function CheckBookingPage() {
+    return (
+      <Suspense fallback={<div className="pt-32 text-center">Loading...</div>}>
+        <CheckBookingContent />
+      </Suspense>
+    );
+  }
