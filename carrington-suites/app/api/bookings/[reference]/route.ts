@@ -39,7 +39,7 @@ export async function GET(req: Request) {
     console.error("FETCH BOOKING ERROR:", error);
 
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Server error. Please try again later." },
       { status: 500 }
     );
   }

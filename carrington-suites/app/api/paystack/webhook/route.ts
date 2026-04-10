@@ -5,6 +5,8 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import crypto from "crypto";
 
+import { sendBookingConfirmationEmail } from "@/lib/email";
+
 export async function POST(req: Request) {
   const rawBody = await req.text();
   const signature = (await headers()).get("x-paystack-signature");
@@ -59,6 +61,10 @@ export async function POST(req: Request) {
           paymentData: JSON.stringify(payment),
         },
       });
+      
+        // 🔥 SEND EMAIL - NEW
+     await sendBookingConfirmationEmail(prisma.booking.update);
+
     } else {
       await prisma.booking.update({
         where: { reference },
