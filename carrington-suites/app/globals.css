@@ -156,3 +156,45 @@ img:hover {
   }
 
 }
+
+/* =========================
+   ADMIN EXTENSIONS (CARRINGTON)
+========================= */
+
+.admin-layout {
+  display: flex !important;
+  min-height: 100vh;
+}
+
+.admin-sidebar {
+  width: 260px !important;
+  background: white !important;
+  border-right: 1px solid #eee;
+  padding: 2rem 1.5rem;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.admin-main {
+  flex: 1;
+  padding: 2rem 3rem;
+}
+
+.admin-link {
+  display: block !important;
+  padding: 0.6rem 0;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.admin-link:hover {
+  color: var(--carrington-navy);
+}
+
+.admin-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+}

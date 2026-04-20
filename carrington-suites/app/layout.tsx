@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 import { Playfair_Display, Inter } from "next/font/google";
+import LayoutClient from "./LayoutClient"; // ✅ NEW
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -36,7 +37,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-
       <body
         className={`
         ${inter.variable} 
@@ -47,27 +47,8 @@ export default function RootLayout({
         antialiased
         `}
       >
-
-        {/* Navigation */}
-        <Navbar />
-
-        {/* Page Content */}
-        <main className="min-h-screen">
-          {children}
-        </main>
-
-        <a
-  href="https://wa.me/2349030009716?text=Hello%20Carrington%20Suites%20I%20would%20like%20to%20make%20a%20reservation"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="fixed bottom-8 right-6 z-50 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full shadow-xl text-sm md:text-base font-medium transition"
->
-  WhatsApp Concierge
-</a>
-
-        {/* Footer */}
-        <Footer />
-
+        {/* ✅ CLIENT WRAPPER HANDLES ADMIN VS PUBLIC */}
+        <LayoutClient>{children}</LayoutClient>
       </body>
     </html>
   );

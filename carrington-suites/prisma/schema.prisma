@@ -4,49 +4,68 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://placeholder"
+  url      = env("DATABASE_URL")
 }
 
 model ApartmentType {
-  id        Int     @id @default(autoincrement())
-  name      String  @unique
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
   price     Int
   units     Unit[]
   createdAt DateTime @default(now())
 }
 
 model Unit {
-  id               Int             @id @default(autoincrement())
-  name             String
-  apartmentTypeId  Int
-  apartmentType    ApartmentType   @relation(fields: [apartmentTypeId], references: [id])
-  bookings         Booking[]
-  createdAt        DateTime        @default(now())
+  id              Int           @id @default(autoincrement())
+  name            String
+
+  apartmentTypeId Int
+  apartmentType   ApartmentType @relation(fields: [apartmentTypeId], references: [id])
+  bookings        Booking[]
+  blockedDates    BlockedDate[]
+  createdAt       DateTime      @default(now())
 }
 
 model Booking {
-  id          Int      @id @default(autoincrement())
-  reference   String   @unique
-  name        String
-  email       String
-  phone       String
+  id        Int    @id @default(autoincrement())
+  reference String @unique
+  name      String
+  email     String
+  phone     String
 
-  unitId      Int
-  unit        Unit     @relation(fields: [unitId], references: [id])
+  unitId Int
+  unit   Unit @relation(fields: [unitId], references: [id])
 
-  checkIn     DateTime
-  checkOut    DateTime
-  nights      Int
+  checkIn  DateTime
+  checkOut DateTime
+  nights   Int
 
-  totalPrice  Int      @default(0)
+  totalPrice Int @default(0)
 
-  notes       String?
+  notes String?
 
-  status      String   @default("PENDING")
+  status String @default("PENDING")
 
   paidAt      DateTime?
   paymentData String?
-  updatedAt   DateTime @updatedAt
+  updatedAt   DateTime  @updatedAt
 
-  createdAt   DateTime @default(now())
+  createdAt DateTime @default(now())
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
+
+model BlockedDate {
+  id        Int      @id @default(autoincrement())
+  unitId    Int
+  date      DateTime
+  reason    String?
+  createdAt DateTime @default(now())
+
+  unit Unit @relation(fields: [unitId], references: [id])
 }

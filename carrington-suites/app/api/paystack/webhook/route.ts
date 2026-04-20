@@ -61,7 +61,7 @@ export async function POST(req: Request) {
           paymentData: JSON.stringify(payment),
         },
       });
-      
+
         // 🔥 SEND EMAIL - NEW
      await sendBookingConfirmationEmail(prisma.booking.update);
 

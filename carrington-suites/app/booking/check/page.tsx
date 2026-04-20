@@ -10,6 +10,7 @@ function CheckBookingContent() {
   const [reference, setReference] = useState("");
   const [booking, setBooking] = useState<any>(null);
   const [error, setError] = useState("");
+  const [qrUrl, setQrUrl] = useState(""); // ✅ NEW
 
   const searchParams = useSearchParams();
 
@@ -21,6 +22,13 @@ function CheckBookingContent() {
       handleAutoFetch(ref);
     }
   }, []);
+
+  // ✅ SAFE CLIENT-ONLY URL
+  useEffect(() => {
+    if (booking) {
+      setQrUrl(`${window.location.origin}/booking/check?ref=${booking.reference}`);
+    }
+  }, [booking]);
 
   const handleAutoFetch = async (ref: string) => {
     try {
@@ -117,14 +125,15 @@ function CheckBookingContent() {
               </p>
             </div>
 
-            {/* ✅ QR CODE */}
+            {/* ✅ QR CODE (FIXED) */}
             <div className="mt-4 flex justify-center">
-            {typeof window !== "undefined" && (
-             <QRCodeSVG
-                value={`${window.location.origin}/booking/check?ref=${booking.reference}`}
-                size={120}
-             />
-            )} </div>
+              {qrUrl && (
+                <QRCodeSVG
+                  value={qrUrl}
+                  size={120}
+                />
+              )}
+            </div>
 
             {/* ✅ ACTION BUTTONS */}
             <div className="mt-6 flex flex-col sm:flex-row gap-3">
@@ -196,9 +205,9 @@ function CheckBookingContent() {
 }
 
 export default function CheckBookingPage() {
-    return (
-      <Suspense fallback={<div className="pt-32 text-center">Loading...</div>}>
-        <CheckBookingContent />
-      </Suspense>
-    );
-  }
+  return (
+    <Suspense fallback={<div className="pt-32 text-center">Loading...</div>}>
+      <CheckBookingContent />
+    </Suspense>
+  );
+}

@@ -1,9 +1,9 @@
 export const dynamic = "force-dynamic";
+
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-
   try {
     const body = await req.json();
 
@@ -62,9 +62,14 @@ export async function POST(req: Request) {
     let availableUnit = null;
 
     for (const unit of apartmentType.units) {
+
+      // 🔥 1. CHECK OVERLAPPING BOOKINGS
       const overlappingBooking = await prisma.booking.findFirst({
         where: {
           unitId: unit.id,
+          status: {
+            notIn: ["CANCELLED"],
+          },
           AND: [
             { checkIn: { lt: checkOutDate } },
             { checkOut: { gt: checkInDate } },
@@ -72,10 +77,24 @@ export async function POST(req: Request) {
         },
       });
 
-      if (!overlappingBooking) {
-        availableUnit = unit;
-        break;
-      }
+      if (overlappingBooking) continue;
+
+      // 🔥 2. CHECK BLOCKED DATES (NEW)
+      const blocked = await prisma.blockedDate.findFirst({
+        where: {
+          unitId: unit.id,
+          date: {
+            gte: checkInDate,
+            lte: checkOutDate,
+          },
+        },
+      });
+
+      if (blocked) continue;
+
+      // ✅ UNIT IS VALID
+      availableUnit = unit;
+      break;
     }
 
     if (!availableUnit) {
@@ -92,8 +111,6 @@ export async function POST(req: Request) {
 
     const totalPrice = nights * apartmentType.price;
 
-    console.log("TOTAL PRICE:", totalPrice); // DEBUG
-
     // ================= CREATE BOOKING =================
     const booking = await prisma.booking.create({
       data: {
@@ -105,8 +122,8 @@ export async function POST(req: Request) {
         checkIn: checkInDate,
         checkOut: checkOutDate,
         nights,
-        totalPrice, // 🔥 FIXED
-        status: "PENDING", // 🔥 IMPORTANT
+        totalPrice,
+        status: "PENDING",
         notes,
       },
     });
