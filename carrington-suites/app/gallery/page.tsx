@@ -85,7 +85,7 @@ Photo Gallery
 </h1>
 
 <p className="text-lg text-gray-200">
-Explore the elegance and comfort of Carrington Suites.
+Explore the elegance and comfort of The Carrington Suites.
 </p>
 
 </div>

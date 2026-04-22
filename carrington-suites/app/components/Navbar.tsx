@@ -23,8 +23,8 @@ export default function Navbar() {
       className={`fixed top-0 w-full z-50 transition-all duration-500 
       ${
         scrolled
-          ? "bg-white shadow-md py-3"
-          : "bg-white/70 backdrop-blur-lg py-5"
+        ? "bg-white shadow-md py-2 md:py-2"
+        : "bg-white/70 backdrop-blur-lg py-3 md:py-4"
       }`}
     >
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 md:px-10 lg:px-16">
@@ -33,12 +33,12 @@ export default function Navbar() {
         <Link href="/" className="flex items-center">
           <Image
             src="/logo.png"
-            alt="Carrington Suites"
+            alt="The Carrington Suites"
             width={320}
             height={120}
             priority
             className={`transition-all duration-500 ${
-              scrolled ? "w-40 md:w-44" : "w-48 md:w-56"
+              scrolled ? "w-32 md:w-36" : "w-36 md:w-44"
             }`}
           />
         </Link>

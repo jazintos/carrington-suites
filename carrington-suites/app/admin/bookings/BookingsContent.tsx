@@ -11,11 +11,15 @@ export default function BookingsPage() {
   const [showCreate, setShowCreate] = useState(false);
   const [form, setForm] = useState<any>({});
 
+  // 🔥 NEW STATE
+  const [apartmentTypes, setApartmentTypes] = useState<any[]>([]);
+
   const searchParams = useSearchParams();
   const statusFilter = searchParams.get("status");
 
   useEffect(() => {
     fetchBookings();
+    fetchApartmentTypes(); // 🔥 NEW
   }, []);
 
   useEffect(() => {
@@ -23,9 +27,36 @@ export default function BookingsPage() {
   }, [bookings, search, statusFilter]);
 
   const fetchBookings = async () => {
-    const res = await fetch("/api/admin/bookings");
-    const data = await res.json();
-    setBookings(data);
+    try {
+      const res = await fetch("/api/admin/bookings");
+  
+      if (!res.ok) throw new Error("Failed");
+  
+      const data = await res.json();
+  
+      if (!Array.isArray(data)) {
+        console.error("Invalid bookings response:", data);
+        setBookings([]);
+        return;
+      }
+  
+      setBookings(data);
+  
+    } catch (err) {
+      console.error("Bookings error:", err);
+      setBookings([]);
+    }
+  };
+
+  // 🔥 NEW FUNCTION
+  const fetchApartmentTypes = async () => {
+    try {
+      const res = await fetch("/api/admin/apartment-types");
+      const data = await res.json();
+      setApartmentTypes(data);
+    } catch (err) {
+      console.error("Apartment types error:", err);
+    }
   };
 
   const applyFilters = () => {
@@ -142,18 +173,15 @@ export default function BookingsPage() {
             {filtered.map((b) => (
               <tr key={b.id} className="border-b hover:bg-gray-50">
 
-                {/* GUEST */}
                 <td className="py-3">
                   <p className="font-medium">{b.name}</p>
                   <p className="text-xs text-gray-500">{b.email}</p>
                 </td>
 
-                {/* REF */}
                 <td className="font-mono text-xs">
                   {b.reference || "—"}
                 </td>
 
-                {/* DATES */}
                 <td>
                   <div className="text-xs">
                     <div>{new Date(b.checkIn).toDateString()}</div>
@@ -163,19 +191,16 @@ export default function BookingsPage() {
                   </div>
                 </td>
 
-                {/* AMOUNT */}
                 <td className="font-medium">
                   ₦{Number(b.totalPrice).toLocaleString()}
                 </td>
 
-                {/* STATUS */}
                 <td>
                   <span className={`px-2 py-1 text-xs rounded ${badge(b.status)}`}>
                     {b.status}
                   </span>
                 </td>
 
-                {/* ACTIONS */}
                 <td className="text-right space-x-2">
 
                   {b.status !== "CONFIRMED" && (
@@ -253,11 +278,24 @@ export default function BookingsPage() {
                 onChange={e => setForm({...form, phone: e.target.value})}
               />
 
-              <input
-                placeholder="Apartment Type (e.g Executive)"
+              {/* 🔥 DROPDOWN REPLACES INPUT */}
+              <select
                 className="p-3 border rounded-lg col-span-2"
-                onChange={e => setForm({...form, apartment: e.target.value})}
-              />
+                value={form.apartment || ""}
+                onChange={(e) =>
+                  setForm({ ...form, apartment: e.target.value })
+                }
+              >
+                <option value="" disabled>
+                  Select Apartment Type
+                </option>
+
+                {apartmentTypes.map((apt) => (
+                  <option key={apt.id} value={apt.name}>
+                    {apt.name} — ₦{Number(apt.price).toLocaleString()}
+                  </option>
+                ))}
+              </select>
 
               <div>
                 <label className="text-xs text-gray-500">Check-in</label>
@@ -279,7 +317,6 @@ export default function BookingsPage() {
 
             </div>
 
-            {/* ACTIONS */}
             <div className="flex justify-end gap-3 mt-6">
 
               <button

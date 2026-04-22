@@ -21,7 +21,7 @@ export default function Intro() {
           <div className="divider"></div>
 
           <p className="text-lg text-gray-700 leading-relaxed">
-            Carrington Suites offers a curated collection of refined private
+            The Carrington Suites offers a curated collection of refined private
             residences designed for discerning travellers seeking an elevated
             living experience in Lagos.
           </p>

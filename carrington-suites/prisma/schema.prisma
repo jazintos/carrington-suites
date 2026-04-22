@@ -50,6 +50,9 @@ model Booking {
   paymentData String?
   updatedAt   DateTime  @updatedAt
 
+  paymentStatus String?
+  paymentRef String?
+
   createdAt DateTime @default(now())
 }
 

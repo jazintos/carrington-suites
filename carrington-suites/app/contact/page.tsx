@@ -46,7 +46,7 @@ export default function Contact() {
         <div className="relative max-w-3xl mx-auto">
 
           <h1 className="text-4xl md:text-6xl font-semibold mb-6">
-            Contact Carrington Suites
+            Contact The Carrington Suites
           </h1>
 
           <p className="text-lg text-gray-200">
@@ -105,7 +105,7 @@ export default function Contact() {
             <div className="hidden lg:block pt-10">
               <img
                 src="/balcony-mini.png"
-                alt="Carrington Suites Balcony View"
+                alt="The Carrington Suites Balcony View"
                 className="rounded-xl shadow-xl"
               />
             </div>

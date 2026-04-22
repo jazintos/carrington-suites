@@ -11,7 +11,7 @@ export default function Hero() {
       <div className="relative max-w-7xl mx-auto px-6 md:px-12 pb-24 text-white">
 
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-light mb-6">
-          Carrington Suites
+          The Carrington Suites
         </h1>
 
         <p className="text-lg md:text-xl max-w-xl mb-10">

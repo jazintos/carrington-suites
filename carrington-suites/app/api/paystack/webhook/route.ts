@@ -41,11 +41,11 @@ export async function POST(req: Request) {
 
     if (!booking) return NextResponse.json({ ok: true });
 
-    if (booking.status === "CONFIRMED") {
+    // 🔥 PREVENT DOUBLE PROCESSING
+    if (booking.paymentStatus === "PAID") {
       return NextResponse.json({ ok: true });
     }
 
-    //const isAmountValid = payment.amount / 100 === booking.totalPrice;
     const TEST_MODE = true;
 
     const isAmountValid = TEST_MODE
@@ -53,26 +53,33 @@ export async function POST(req: Request) {
       : payment.amount / 100 === booking.totalPrice;
 
     if (isAmountValid) {
-      await prisma.booking.update({
+
+      // 🔥 UPDATE BOOKING (RECONCILED)
+      const updatedBooking = await prisma.booking.update({
         where: { reference },
         data: {
           status: "CONFIRMED",
-          paidAt: new Date(),
+          paymentStatus: "PAID",            // ✅ NEW
+          paidAt: new Date(),               // ✅ KEEP
+          paymentRef: reference,            // ✅ NEW
           paymentData: JSON.stringify(payment),
         },
       });
 
-        // 🔥 SEND EMAIL - NEW
-     await sendBookingConfirmationEmail(prisma.booking.update);
+      // 🔥 SEND EMAIL (FIXED)
+      await sendBookingConfirmationEmail(updatedBooking);
 
     } else {
+
       await prisma.booking.update({
         where: { reference },
         data: {
           status: "FAILED",
+          paymentStatus: "FAILED",          // ✅ NEW
           paymentData: JSON.stringify(payment),
         },
       });
+
     }
   }
 

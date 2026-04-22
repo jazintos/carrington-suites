@@ -84,6 +84,12 @@ export default function AdminLayout({ children }: any) {
               pathname={pathname}
             />
 
+            <NavItem 
+            href="/admin/payments" 
+            label="Payments"
+            pathname={pathname}
+            /> 
+   
           </nav>
 
         </div>
@@ -113,8 +119,8 @@ export default function AdminLayout({ children }: any) {
 
 // 🔥 NAV ITEM COMPONENT (ACTIVE HIGHLIGHT)
 function NavItem({ href, label, pathname }: any) {
-  const isActive = pathname === href;
-
+  const isActive = pathname.startsWith(href);
+  
   return (
     <Link
       href={href}

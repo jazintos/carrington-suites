@@ -5,12 +5,12 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function sendBookingConfirmationEmail(booking: any) {
   try {
     await resend.emails.send({
-      from: "Carrington Suites <no-reply@yourdomain.com>",
+      from: "The Carrington Suites <no-reply@yourdomain.com>",
       to: booking.email,
-      subject: "Booking Confirmation - Carrington Suites",
+      subject: "Booking Confirmation - The Carrington Suites",
       html: `
       <div style="font-family:Arial;padding:20px;">
-      <h2 style="color:#0B2C5F;">Carrington Suites</h2>
+      <h2 style="color:#0B2C5F;">The Carrington Suites</h2>
       <hr/>
       
       <h3>Booking Confirmed</h3>
@@ -36,7 +36,7 @@ export async function sendBookingConfirmationEmail(booking: any) {
       <p>We look forward to hosting you.</p>
     </div>
 
-        <p><strong>Carrington Suites</strong></p>
+        <p><strong>The Carrington Suites</strong></p>
       `,
     });
   } catch (error) {

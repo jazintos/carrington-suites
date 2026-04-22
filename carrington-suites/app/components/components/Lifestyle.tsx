@@ -17,7 +17,7 @@ export default function Lifestyle() {
         </h2>
 
         <p className="text-gray-700 leading-relaxed">
-          Carrington Suites places guests moments away from Lagos’ finest
+        The Carrington Suites places guests moments away from Lagos’ finest
           restaurants, business districts and waterfront experiences.
           A perfect balance between vibrant city life and private comfort.
         </p>
