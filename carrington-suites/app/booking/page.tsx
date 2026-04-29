@@ -4,13 +4,14 @@ import { useState } from "react";
 export default function Booking() {
 
   const [status, setStatus] = useState("");
+  const [error, setError] = useState(""); // ✅ NEW
   const [bookingData, setBookingData] = useState<any>(null);
   const [pricePreview, setPricePreview] = useState<any>(null);
 
   const PRICES: any = {
-    Executive: 800000,
-    Premium: 600000,
-    Signature: 500000,
+    "one-bedroom": 300000,
+    "two-bedroom": 350000,
+    "three-bedroom": 450000,
   };
 
   const calculatePrice = (apartment: string, checkin: string, checkout: string) => {
@@ -43,6 +44,7 @@ export default function Booking() {
     e.preventDefault();
 
     setStatus("Processing booking...");
+    setError(""); // ✅ reset error
     setBookingData(null);
 
     const form = e.currentTarget;
@@ -69,15 +71,18 @@ export default function Booking() {
 
       if (response.ok) {
         setStatus("Booking confirmed");
+        setError("");
         setBookingData(data);
         setPricePreview(null);
         form.reset();
       } else {
-        setStatus(data.error || "Something went wrong.");
+        setError(data.error || "Something went wrong."); // ✅ ERROR now handled properly
+        setStatus("");
       }
 
     } catch {
-      setStatus("Network error. Please try again.");
+      setError("Network error. Please try again."); // ✅ ERROR state
+      setStatus("");
     }
   };
 
@@ -104,7 +109,7 @@ export default function Booking() {
       {/* BOOKING */}
       <section className="px-6 md:px-16 py-20 md:py-28">
 
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
           <div className="hidden lg:block">
             <img
@@ -114,7 +119,7 @@ export default function Booking() {
             />
           </div>
 
-          <div className="bg-white shadow-xl rounded-xl p-8 md:p-12">
+          <div className="bg-white shadow-xl rounded-xl p-10 md:p-14">
 
             <h2 className="text-2xl font-semibold text-[#0B2C5F] mb-8">
               Booking Details
@@ -140,47 +145,29 @@ export default function Booking() {
                 }}
                 className="border px-4 py-3"
               >
-                <option value="">Select Type</option>
-                <option value="Executive">Executive</option>
-                <option value="Premium">Premium</option>
-                <option value="Signature">Signature</option>
+                <option value="">Select Residence</option>
+                <option value="one-bedroom">One-Bedroom Penthouse Residence</option>
+                <option value="two-bedroom">Two-Bedroom Signature Penthouse</option>
+                <option value="three-bedroom">Three-Bedroom Premium Residence</option>
               </select>
 
-              <input
-                type="date"
-                name="checkin"
-                required
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  const form = e.currentTarget.form;
-                  if (!form) return;
+              {/* CHECK-IN */}
+              <div className="flex flex-col">
+                <label className="text-sm mb-1 text-gray-600">Check-in Date</label>
+                <input type="date" name="checkin" required className="border px-4 py-3" />
+              </div>
 
-                  const apartment = (form.elements.namedItem("apartment") as HTMLSelectElement)?.value;
-                  const checkout = (form.elements.namedItem("checkout") as HTMLInputElement)?.value;
-
-                  calculatePrice(apartment, e.currentTarget.value, checkout);
-                }}
-                className="border px-4 py-3"
-              />
-
-              <input
-                type="date"
-                name="checkout"
-                required
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  const form = e.currentTarget.form;
-                  if (!form) return;
-
-                  const apartment = (form.elements.namedItem("apartment") as HTMLSelectElement)?.value;
-                  const checkin = (form.elements.namedItem("checkin") as HTMLInputElement)?.value;
-
-                  calculatePrice(apartment, checkin, e.currentTarget.value);
-                }}
-                className="border px-4 py-3"
-              />
+              {/* CHECK-OUT */}
+              <div className="flex flex-col">
+                <label className="text-sm mb-1 text-gray-600">Check-out Date</label>
+                <input type="date" name="checkout" required className="border px-4 py-3" />
+              </div>
 
               {pricePreview && (
                 <div className="md:col-span-2 text-center border p-4">
-                  <p>{pricePreview.nights} nights</p>
+                  <p>
+                    {pricePreview.nights} {pricePreview.nights === 1 ? "Night" : "Nights"}
+                  </p>
                   <p className="font-bold">₦{pricePreview.total.toLocaleString()}</p>
                 </div>
               )}
@@ -193,8 +180,18 @@ export default function Booking() {
 
             </form>
 
-            {status && !bookingData && (
-              <p className="mt-6 text-center">{status}</p>
+            {/* ❌ ERROR */}
+            {error && (
+              <p className="mt-6 text-center text-red-600 flex items-center justify-center gap-2 font-medium">
+                <span>⚠️</span> {error}
+              </p>
+            )}
+
+            {/* ✅ SUCCESS */}
+            {status && !error && !bookingData && (
+              <p className="mt-6 text-center text-green-600 font-medium">
+                {status}
+              </p>
             )}
 
             {bookingData && (
@@ -204,34 +201,10 @@ export default function Booking() {
 
                 <p>Ref: {bookingData.bookingReference}</p>
                 <p>Unit: {bookingData.unitAssigned}</p>
-                <p>{bookingData.nights} nights</p>
+                <p>
+                  {bookingData.nights} {bookingData.nights === 1 ? "Night" : "Nights"}
+                </p>
                 <p className="font-bold">₦{bookingData.totalPrice.toLocaleString()}</p>
-
-                <button
-                  onClick={async () => {
-                    const res = await fetch("/api/payments/initialize", {
-                      method: "POST",
-                      headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify({
-                        reference: bookingData.bookingReference,
-                      }),
-                    });
-
-                    const data = await res.json();
-
-                    console.log("FRONTEND RESPONSE:", data);
-
-                    if (data.authorization_url || data.paymentUrl) {
-                      window.location.href = data.authorization_url || data.paymentUrl;
-                    } else {
-                      console.error("INIT ERROR:", data);
-                      alert("Payment failed");
-                    }
-                  }}
-                  className="mt-6 bg-[#C6A85B] text-white px-6 py-3"
-                >
-                  Proceed to Payment
-                </button>
 
               </div>
             )}

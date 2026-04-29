@@ -2,14 +2,14 @@
 
 import { BedDouble, Tv, Wifi, ParkingCircle, AirVent, CookingPot, ShieldCheck, Sparkles, Users } from "lucide-react";
 
-export default function PremiumResidence() {
+export default function ThreeBedroomResidence() {
 
   const gallery = [
-    "/suite-dark-1.png",
+    "/suite-modern-1.png",
     "/living-1.png",
     "/balcony-mini.png",
     "/tv-wall.png",
-    "/suite-modern-1.png"
+    "/suite-dark-1.png"
   ];
 
   return (
@@ -19,7 +19,7 @@ export default function PremiumResidence() {
       <section
         className="relative h-[80vh] md:h-[92vh] flex items-center text-white"
         style={{
-          backgroundImage: "url('/suite-dark-1.png')",
+          backgroundImage: "url('/suite-modern-1.png')",
           backgroundSize: "cover",
           backgroundPosition: "center"
         }}
@@ -30,35 +30,47 @@ export default function PremiumResidence() {
         <div className="relative max-w-6xl px-6 md:px-16">
 
           <h1 className="text-4xl md:text-7xl font-semibold mb-6">
-            Premium Residence
+            Three-Bedroom Premium Residence
           </h1>
 
           <p className="text-lg md:text-xl text-gray-200 max-w-xl">
-            An elevated two-bedroom residence offering refined interiors,
-            generous living spaces, and sophisticated comfort for guests
-            seeking a superior stay.
+            An expansive private residence designed for those who value space,
+            privacy, and refined living, offering elegant interiors and a seamless
+            blend of comfort and sophistication.
           </p>
 
           {/* KEY DETAILS */}
           <div className="mt-6 flex flex-wrap gap-6 text-sm md:text-base text-gray-200">
 
             <div className="flex items-center gap-2">
-              <BedDouble size={18} /> 2 Bedrooms
+              <BedDouble size={18} /> 3 Bedrooms
             </div>
 
             <div className="flex items-center gap-2">
-              <Users size={18} /> Up to 4 Guests
+              <Users size={18} /> Up to 6 Guests
             </div>
 
-            <div className="flex items-center gap-2 text-red-300 font-semibold">
-              <ShieldCheck size={18} /> Only 1 Unit Available
+            <div className="flex items-center gap-2">
+              <ShieldCheck size={18} /> 8 Units Available
             </div>
 
           </div>
 
-          {/* PRICE */}
-          <div className="mt-8 text-2xl md:text-3xl font-semibold">
-            ₦600,000 <span className="text-base font-normal">/ Night</span>
+          {/* PRICING */}
+          <div className="mt-8">
+
+            <p className="text-gray-300 line-through text-sm">
+              ₦800,000 / Night
+            </p>
+
+            <p className="text-2xl md:text-3xl font-semibold">
+              ₦450,000 <span className="text-base font-normal">/ Night</span>
+            </p>
+
+            <p className="text-xs text-[#C6A85B] mt-1 tracking-wide">
+              Limited Offer
+            </p>
+
           </div>
 
         </div>
@@ -73,16 +85,16 @@ export default function PremiumResidence() {
         <div className="max-w-3xl">
 
           <h2 className="text-3xl md:text-4xl font-semibold text-[#0B2C5F] mb-4">
-            Premium Comfort & Sophistication
+            Elevated Living, Redefined
           </h2>
 
           <div className="w-16 h-[2px] bg-[#C6A85B] mb-6"></div>
 
           <p className="text-gray-700 leading-relaxed text-lg">
-            The Premium Residence offers a refined environment where
-            modern elegance meets exceptional comfort. Designed with
-            carefully curated interiors and spacious layouts, this residence
-            delivers a luxurious yet welcoming atmosphere.
+            The Three-Bedroom Premium Residence at Carrington Suites offers a refined
+            living experience defined by space, elegance, and privacy. Expansive interiors,
+            thoughtfully curated finishes, and a calm residential atmosphere create a setting
+            where comfort and sophistication exist in perfect balance.
           </p>
 
         </div>
@@ -98,20 +110,20 @@ export default function PremiumResidence() {
 
           <div className="bg-[#F8F6F2] p-8 rounded-lg text-center">
             <BedDouble className="mx-auto mb-4 text-[#C6A85B]" size={36}/>
-            <h3 className="text-xl font-semibold mb-2 text-[#0B2C5F]">Spacious Interiors</h3>
-            <p className="text-gray-600">Large living areas designed for relaxation and style.</p>
+            <h3 className="text-xl font-semibold mb-2 text-[#0B2C5F]">Spacious Living</h3>
+            <p className="text-gray-600">Generous living areas designed for comfort and relaxation.</p>
           </div>
 
           <div className="bg-[#F8F6F2] p-8 rounded-lg text-center">
             <Sparkles className="mx-auto mb-4 text-[#C6A85B]" size={36}/>
-            <h3 className="text-xl font-semibold mb-2 text-[#0B2C5F]">Luxury Finishes</h3>
-            <p className="text-gray-600">Elegant materials and modern architectural design.</p>
+            <h3 className="text-xl font-semibold mb-2 text-[#0B2C5F]">Premium Interiors</h3>
+            <p className="text-gray-600">Carefully curated materials and refined finishes.</p>
           </div>
 
           <div className="bg-[#F8F6F2] p-8 rounded-lg text-center">
             <ShieldCheck className="mx-auto mb-4 text-[#C6A85B]" size={36}/>
             <h3 className="text-xl font-semibold mb-2 text-[#0B2C5F]">Private Balcony</h3>
-            <p className="text-gray-600">Enjoy tranquil moments overlooking Victoria Island.</p>
+            <p className="text-gray-600">Enjoy peaceful views from your private outdoor space.</p>
           </div>
 
         </div>
@@ -129,12 +141,12 @@ export default function PremiumResidence() {
 
         <div className="grid md:grid-cols-3 gap-6">
 
-          <img src={gallery[0]} className="rounded-lg object-cover h-[320px] w-full"/>
-          <img src={gallery[1]} className="rounded-lg object-cover h-[320px] w-full"/>
-          <img src={gallery[2]} className="rounded-lg object-cover h-[320px] w-full"/>
+          <img src={gallery[0]} className="rounded-lg object-cover h-[260px] md:h-[320px] w-full"/>
+          <img src={gallery[1]} className="rounded-lg object-cover h-[260px] md:h-[320px] w-full"/>
+          <img src={gallery[2]} className="rounded-lg object-cover h-[260px] md:h-[320px] w-full"/>
 
-          <img src={gallery[3]} className="rounded-lg object-cover h-[320px] w-full md:col-span-2"/>
-          <img src={gallery[4]} className="rounded-lg object-cover h-[320px] w-full"/>
+          <img src={gallery[3]} className="rounded-lg object-cover h-[260px] md:h-[320px] w-full md:col-span-2"/>
+          <img src={gallery[4]} className="rounded-lg object-cover h-[260px] md:h-[320px] w-full"/>
 
         </div>
 
@@ -170,7 +182,7 @@ export default function PremiumResidence() {
       <section className="bg-[#F7F5F0] py-16 text-center px-6">
 
         <h2 className="text-3xl md:text-5xl mb-6 font-semibold text-[#0B2C5F]">
-          Book the Premium Residence
+          Reserve the Three-Bedroom Residence
         </h2>
 
         <button

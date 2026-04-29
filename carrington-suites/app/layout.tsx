@@ -21,11 +21,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "The Carrington Suites | Private Luxury Residences",
   description:
-    "Carrington Suites offers luxury private executive residences in Victoria Island, Lagos. Experience refined comfort and elegant living.",
+    "Carrington Suites offers luxury private residences in Victoria Island, Lagos. Experience refined comfort and elegant living.",
   keywords: [
     "Luxury apartments Victoria Island",
     "Short stay luxury Lagos",
-    "Executive residences Lagos",
+    "Signature residences Lagos",
     "Carrington Suites",
   ],
 };

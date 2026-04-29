@@ -1,17 +1,20 @@
 'use client';
 
-import router from 'next/router';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
+import { useRouter } from 'next/navigation'; // ✅ correct router
+import { useState, useEffect } from 'react';
 
 export default function LoginPage() {
+  const router = useRouter(); // ✅ initialize router
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
     const res = await fetch('/api/auth/login', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json', // ✅ important
+      },
       body: JSON.stringify({ email, password }),
     });
 
@@ -19,18 +22,22 @@ export default function LoginPage() {
 
     if (res.ok) {
       localStorage.setItem('adminToken', data.token);
-      router.push('/admin/login')
+
+      // ✅ redirect to dashboard (correct)
+      router.push('/admin/dashboard');
     } else {
       alert(data.error);
     }
   };
+
   useEffect(() => {
     const token = localStorage.getItem('adminToken');
-  
+
     if (token) {
-      window.location.href = '/admin/dashboard';
+      // ✅ use router instead of window.location
+      router.push('/admin/dashboard');
     }
-  }, []);
+  }, [router]);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-black">

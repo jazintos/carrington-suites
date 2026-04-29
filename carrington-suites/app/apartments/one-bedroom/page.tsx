@@ -2,10 +2,10 @@
 
 import { BedDouble, Tv, Wifi, ParkingCircle, AirVent, CookingPot, ShieldCheck, Sparkles, Users } from "lucide-react";
 
-export default function SignatureResidence() {
+export default function OneBedroomResidence() {
 
   const gallery = [
-    "/suite-wood-1.png",
+    "/suite-dark-1.png",
     "/living-1.png",
     "/balcony-mini.png",
     "/tv-wall.png",
@@ -19,7 +19,7 @@ export default function SignatureResidence() {
       <section
         className="relative h-[80vh] md:h-[92vh] flex items-center text-white"
         style={{
-          backgroundImage: "url('/suite-wood-1.png')",
+          backgroundImage: "url('/suite-dark-1.png')",
           backgroundSize: "cover",
           backgroundPosition: "center"
         }}
@@ -30,13 +30,13 @@ export default function SignatureResidence() {
         <div className="relative max-w-6xl px-6 md:px-16">
 
           <h1 className="text-4xl md:text-7xl font-semibold mb-6">
-            Signature Residence
+            One-Bedroom Penthouse Residence
           </h1>
 
           <p className="text-lg md:text-xl text-gray-200 max-w-xl">
-            A refined one-bedroom residence offering elegant interiors,
-            privacy, and comfort, ideal for guests seeking a premium
-            yet intimate luxury stay at Carrington Suites.
+            A refined private penthouse designed for comfort, privacy, and
+            understated elegance, offering a calm and intimate environment
+            for discerning guests.
           </p>
 
           {/* KEY DETAILS */}
@@ -56,9 +56,21 @@ export default function SignatureResidence() {
 
           </div>
 
-          {/* PRICE */}
-          <div className="mt-8 text-2xl md:text-3xl font-semibold">
-            ₦500,000 <span className="text-base font-normal">/ Night</span>
+          {/* PRICING */}
+          <div className="mt-8">
+
+            <p className="text-gray-300 line-through text-sm">
+              ₦450,000 / Night
+            </p>
+
+            <p className="text-2xl md:text-3xl font-semibold">
+              ₦300,000 <span className="text-base font-normal">/ Night</span>
+            </p>
+
+            <p className="text-xs text-[#C6A85B] mt-1 tracking-wide">
+              Limited Offer
+            </p>
+
           </div>
 
         </div>
@@ -73,17 +85,16 @@ export default function SignatureResidence() {
         <div className="max-w-3xl">
 
           <h2 className="text-3xl md:text-4xl font-semibold text-[#0B2C5F] mb-4">
-            Intimate Luxury & Comfort
+            Refined Comfort & Privacy
           </h2>
 
           <div className="w-16 h-[2px] bg-[#C6A85B] mb-6"></div>
 
           <p className="text-gray-700 leading-relaxed text-lg">
-            The Signature Residence offers a refined living experience
-            designed for comfort and privacy. With carefully curated
-            interiors and a warm, elegant atmosphere, it provides
-            the perfect balance of luxury and simplicity for shorter
-            or more intimate stays.
+            The One-Bedroom Penthouse Residence at Carrington Suites offers an
+            intimate and refined living experience. Designed with elegant finishes,
+            a calm atmosphere, and thoughtful spatial planning, it provides the
+            perfect balance of comfort, privacy, and understated luxury.
           </p>
 
         </div>
@@ -100,20 +111,20 @@ export default function SignatureResidence() {
           <div className="bg-[#F8F6F2] p-8 rounded-lg text-center">
             <BedDouble className="mx-auto mb-4 text-[#C6A85B]" size={36}/>
             <h3 className="text-xl font-semibold mb-2 text-[#0B2C5F]">
-              Cozy & Elegant Space
+              Intimate Living Space
             </h3>
             <p className="text-gray-600">
-              Thoughtfully designed interiors for comfort and relaxation.
+              Thoughtfully designed for comfort, relaxation, and privacy.
             </p>
           </div>
 
           <div className="bg-[#F8F6F2] p-8 rounded-lg text-center">
             <Sparkles className="mx-auto mb-4 text-[#C6A85B]" size={36}/>
             <h3 className="text-xl font-semibold mb-2 text-[#0B2C5F]">
-              Refined Finishes
+              Elegant Finishes
             </h3>
             <p className="text-gray-600">
-              Elegant materials and modern detailing throughout.
+              Carefully curated materials and refined interior details.
             </p>
           </div>
 
@@ -123,7 +134,7 @@ export default function SignatureResidence() {
               Private Balcony
             </h3>
             <p className="text-gray-600">
-              Enjoy peaceful moments overlooking Victoria Island.
+              Enjoy peaceful moments in a quiet, elevated setting.
             </p>
           </div>
 
@@ -142,12 +153,12 @@ export default function SignatureResidence() {
 
         <div className="grid md:grid-cols-3 gap-6">
 
-          <img src={gallery[0]} className="rounded-lg object-cover h-[320px] w-full"/>
-          <img src={gallery[1]} className="rounded-lg object-cover h-[320px] w-full"/>
-          <img src={gallery[2]} className="rounded-lg object-cover h-[320px] w-full"/>
+          <img src={gallery[0]} className="rounded-lg object-cover h-[260px] md:h-[320px] w-full"/>
+          <img src={gallery[1]} className="rounded-lg object-cover h-[260px] md:h-[320px] w-full"/>
+          <img src={gallery[2]} className="rounded-lg object-cover h-[260px] md:h-[320px] w-full"/>
 
-          <img src={gallery[3]} className="rounded-lg object-cover h-[320px] w-full md:col-span-2"/>
-          <img src={gallery[4]} className="rounded-lg object-cover h-[320px] w-full"/>
+          <img src={gallery[3]} className="rounded-lg object-cover h-[260px] md:h-[320px] w-full md:col-span-2"/>
+          <img src={gallery[4]} className="rounded-lg object-cover h-[260px] md:h-[320px] w-full"/>
 
         </div>
 
@@ -183,7 +194,7 @@ export default function SignatureResidence() {
       <section className="bg-[#F7F5F0] py-16 text-center px-6">
 
         <h2 className="text-3xl md:text-5xl mb-6 font-semibold text-[#0B2C5F]">
-          Book the Signature Residence
+          Reserve the One-Bedroom Penthouse
         </h2>
 
         <button

@@ -45,9 +45,18 @@ export async function POST(req: Request) {
       );
     }
 
+    // ================= 🔥 FLEXIBLE MATCH =================
+    const apartmentMap: any = {
+      "one-bedroom": "One-Bedroom Penthouse Residence",
+      "two-bedroom": "Two-Bedroom Signature Penthouse",
+      "three-bedroom": "Three-Bedroom Premium Residence",
+    };
+
+    const apartmentName = apartmentMap[apartment] || apartment;
+
     // ================= FIND APARTMENT TYPE =================
     const apartmentType = await prisma.apartmentType.findUnique({
-      where: { name: apartment },
+      where: { name: apartmentName },
       include: { units: true },
     });
 
@@ -57,7 +66,7 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
-
+    
     // ================= FIND AVAILABLE UNIT =================
     let availableUnit = null;
 
@@ -79,7 +88,7 @@ export async function POST(req: Request) {
 
       if (overlappingBooking) continue;
 
-      // 🔥 2. CHECK BLOCKED DATES (NEW)
+      // 🔥 2. CHECK BLOCKED DATES
       const blocked = await prisma.blockedDate.findFirst({
         where: {
           unitId: unit.id,

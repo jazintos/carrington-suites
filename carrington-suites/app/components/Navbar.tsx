@@ -59,18 +59,19 @@ export default function Navbar() {
               RESIDENCES
             </Link>
 
-            <div className="absolute left-0 top-full mt-4 hidden group-hover:block bg-white shadow-xl rounded-lg overflow-hidden min-w-[220px] border">
+            {/* ✅ FIXED DROPDOWN */}
+            <div className="absolute left-0 top-full w-72 bg-white shadow-xl rounded-lg overflow-hidden border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 z-50">
 
-              <Link href="/apartments/executive" className="block px-6 py-3 text-sm hover:bg-gray-50">
-                Executive Residence
+              <Link href="/apartments/one-bedroom" className="block px-6 py-3 text-sm hover:bg-gray-50">
+                One-Bedroom Penthouse Residence
               </Link>
 
-              <Link href="/apartments/premium" className="block px-6 py-3 text-sm hover:bg-gray-50">
-                Premium Residence
+              <Link href="/apartments/two-bedroom" className="block px-6 py-3 text-sm hover:bg-gray-50">
+                Two-Bedroom Signature Penthouse
               </Link>
 
-              <Link href="/apartments/signature" className="block px-6 py-3 text-sm hover:bg-gray-50">
-                Signature Residence
+              <Link href="/apartments/three-bedroom" className="block px-6 py-3 text-sm hover:bg-gray-50">
+                Three-Bedroom Premium Residence
               </Link>
 
             </div>
@@ -84,7 +85,6 @@ export default function Navbar() {
             CONTACT
           </Link>
 
-          {/* ✅ NEW: CHECK BOOKING */}
           <Link
             href="/booking/check"
             className="hover:text-[#3F6A64] transition duration-300"
@@ -138,16 +138,16 @@ export default function Navbar() {
             {resOpen && (
               <div className="mt-4 space-y-4 text-lg text-gray-700">
 
-                <Link href="/apartments/executive" onClick={() => setOpen(false)} className="block">
-                  Executive Residence
+                <Link href="/apartments/one-bedroom" onClick={() => setOpen(false)} className="block">
+                  One-Bedroom Penthouse Residence
                 </Link>
 
-                <Link href="/apartments/premium" onClick={() => setOpen(false)} className="block">
-                  Premium Residence
+                <Link href="/apartments/two-bedroom" onClick={() => setOpen(false)} className="block">
+                  Two-Bedroom Signature Penthouse
                 </Link>
 
-                <Link href="/apartments/signature" onClick={() => setOpen(false)} className="block">
-                  Signature Residence
+                <Link href="/apartments/three-bedroom" onClick={() => setOpen(false)} className="block">
+                  Three-Bedroom Premium Residence
                 </Link>
 
               </div>
@@ -170,7 +170,6 @@ export default function Navbar() {
             Reserve Your Stay
           </Link>
 
-          {/* ✅ FIXED ROUTE */}
           <Link
             href="/booking/check"
             onClick={() => setOpen(false)}

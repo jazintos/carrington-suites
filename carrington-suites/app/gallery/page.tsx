@@ -6,7 +6,7 @@ export default function Gallery() {
 
   const images = [
 
-    { src: "/suite-modern-1.png", title: "Executive Suite Bedroom", category: "residences" },
+    { src: "/suite-modern-1.png", title: "3-bed Suite Bedroom", category: "residences" },
     { src: "/suite-dark-1.png", title: "Premium Suite Bedroom", category: "residences" },
     { src: "/suite-wood-1.png", title: "Signature Residence Bedroom", category: "residences" },
     { src: "/suite-wood-2.png", title: "Signature Residence Living Area", category: "residences" },

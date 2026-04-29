@@ -8,8 +8,6 @@ export async function GET() {
   try {
     const bookings = await prisma.booking.findMany();
 
-    console.log("BOOKINGS DATA:", bookings);
-
     const totalBookings = bookings.length;
 
     const totalRevenue = bookings.reduce(

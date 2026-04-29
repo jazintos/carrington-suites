@@ -10,28 +10,31 @@ export default function Apartments() {
 
   const apartments = [
     {
-      name: "Executive 3-Bedroom Suite",
-      price: "₦300,000 / Night",
+      name: "One-Bedroom Penthouse Residence",
+      originalPrice: 450000,
+      salePrice: 300000,
       image: "/suite-modern-1.png",
-      link: "/apartments/executive",
+      link: "/apartments/one-bedroom",
       description:
-        "Spacious executive residence designed with refined interiors, expansive living areas, and modern comforts tailored for discerning guests.",
+        "A refined private retreat designed for comfort, privacy, and effortless living.",
     },
     {
-      name: "Premium 3-Bedroom Suite",
-      price: "₦450,000 / Night",
+      name: "Two-Bedroom Signature Penthouse",
+      originalPrice: 600000,
+      salePrice: 350000,
       image: "/suite-dark-1.png",
-      link: "/apartments/premium",
+      link: "/apartments/two-bedroom",
       description:
-        "Elevated luxury living with sophisticated design, premium furnishings, and an executive atmosphere perfect for extended stays.",
+        "Spacious, elegant, and perfectly suited for elevated shared living.",
     },
     {
-      name: "Signature 3-Bedroom Residence",
-      price: "₦600,000 / Night",
+      name: "Three-Bedroom Premium Residence",
+      originalPrice: 800000,
+      salePrice: 450000,
       image: "/suite-wood-1.png",
-      link: "/apartments/signature",
+      link: "/apartments/three-bedroom", 
       description:
-        "Our most exclusive residence offering exceptional comfort, refined aesthetics, and a superior hospitality experience.",
+        "Expansive living designed for those who value space, privacy, and refined comfort.",
     },
   ];
 
@@ -54,12 +57,13 @@ export default function Apartments() {
         <div className="relative text-center max-w-4xl px-6">
 
           <h1 className="text-4xl md:text-7xl font-semibold mb-6 leading-tight">
-            Luxury Private Residences
+          Private Residences Designed for Quiet Luxury
           </h1>
 
           <p className="text-lg md:text-xl text-gray-200 leading-relaxed">
-            Discover refined three-bedroom residences crafted for comfort,
-            privacy, and elevated living in Victoria Island.
+          A collection of refined residences located on a diplomatic street
+in the heart of Victoria Island, designed for comfort, privacy,
+and understated elegance.
           </p>
 
         </div>
@@ -137,9 +141,21 @@ export default function Apartments() {
                   {apt.description}
                 </p>
 
-                <p className="font-semibold text-lg mb-6 text-black">
-                  {apt.price}
-                </p>
+             <div className="mb-6">
+
+              <p className="text-gray-400 line-through text-sm">
+                ₦{apt.originalPrice.toLocaleString()} / Night
+              </p>
+
+              <p className="font-semibold text-lg text-black">
+                ₦{apt.salePrice.toLocaleString()} / Night
+              </p>
+
+              <p className="text-xs text-[#C6A85B] mt-1 tracking-wide">
+                Limited Offer
+              </p>
+
+              </div>
 
                 <button
                   onClick={(e) => {

@@ -9,48 +9,48 @@ async function main() {
   await prisma.unit.deleteMany();
   await prisma.apartmentType.deleteMany();
 
-  // CREATE TYPES
-  const executive = await prisma.apartmentType.create({
-    data: { name: "Executive", price: 800000 },
+  // CREATE TYPES (UPDATED NAMES + PRICES)
+  const threeBedroom = await prisma.apartmentType.create({
+    data: { name: "Three-Bedroom Premium Residence", price: 450000 },
   });
 
-  const premium = await prisma.apartmentType.create({
-    data: { name: "Premium", price: 600000 },
+  const twoBedroom = await prisma.apartmentType.create({
+    data: { name: "Two-Bedroom Signature Penthouse", price: 350000 },
   });
 
-  const signature = await prisma.apartmentType.create({
-    data: { name: "Signature", price: 500000 },
+  const oneBedroom = await prisma.apartmentType.create({
+    data: { name: "One-Bedroom Penthouse Residence", price: 300000 },
   });
 
-  // CREATE UNITS
+// CREATE UNITS
 
-  // Executive → 8 units
-  for (let i = 1; i <= 8; i++) {
-    await prisma.unit.create({
-      data: {
-        name: `Executive-${i}`,
-        apartmentTypeId: executive.id,
-      },
-    });
-  }
-
-  // Premium → 1 unit
+// Three-Bedroom → 8 units
+for (let i = 1; i <= 8; i++) {
   await prisma.unit.create({
     data: {
-      name: "Premium-1",
-      apartmentTypeId: premium.id,
+      name: `ThreeBedroom-${i}`,
+      apartmentTypeId: threeBedroom.id,
     },
   });
+}
 
-  // Signature → 3 units
-  for (let i = 1; i <= 3; i++) {
-    await prisma.unit.create({
-      data: {
-        name: `Signature-${i}`,
-        apartmentTypeId: signature.id,
-      },
-    });
-  }
+// Two-Bedroom → 1 unit ONLY
+await prisma.unit.create({
+  data: {
+    name: "TwoBedroom-1",
+    apartmentTypeId: twoBedroom.id,
+  },
+});
+
+// One-Bedroom → 3 units
+for (let i = 1; i <= 3; i++) {
+  await prisma.unit.create({
+    data: {
+      name: `OneBedroom-${i}`,
+      apartmentTypeId: oneBedroom.id,
+    },
+  });
+}
 
   console.log("✅ Seeded successfully");
 }

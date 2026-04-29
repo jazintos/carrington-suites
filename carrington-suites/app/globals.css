@@ -105,6 +105,7 @@ img:hover {
   padding: 0.9rem 2rem;
   letter-spacing: 0.08em;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .btn-primary:hover {
@@ -117,6 +118,7 @@ img:hover {
   padding: 0.9rem 2rem;
   letter-spacing: 0.08em;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .btn-outline:hover {
@@ -197,4 +199,27 @@ img:hover {
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+}
+
+button,
+a,
+[role="button"] {
+  cursor: pointer;
+}
+
+button:hover,
+a:hover,
+[role="button"]:hover {
+  cursor: pointer;
+}
+
+
+
+
+/* FORCE POINTER FIX */
+button,
+a,
+[role="button"],
+.cursor-fix {
+  cursor: pointer !important;
 }

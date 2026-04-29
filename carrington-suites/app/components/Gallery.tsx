@@ -15,23 +15,23 @@ export default function Gallery() {
   const slides = [
     {
       src: "/suite-modern-1.png",
-      title: "Executive Residence",
+      title: "3-bed Premium Residence",
       description: "Elegant living spaces designed for refined comfort."
     },
     {
       src: "/suite-dark-1.png",
-      title: "Premium Residence",
+      title: "2-bed PentHouse Residence",
       description: "Luxury interiors crafted for a premium stay."
     },
     {
       src: "/suite-wood-2.png",
-      title: "Signature Residence",
+      title: "1-bed Penthouse Signature Residence",
       description: "A private sanctuary in Victoria Island."
     },
     {
       src: "/tv-wall.png",
       title: "Modern Interiors",
-      description: "Contemporary design with executive comfort."
+      description: "Contemporary design with luxuriouscomfort."
     }
   ];
 

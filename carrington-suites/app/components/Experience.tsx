@@ -21,7 +21,7 @@ export default function Experience() {
     { label: "Luxury Interiors", icon: <Sparkles className="text-[#C6A85B]" size={28}/> },
     { label: "Concierge Assistance", icon: <ConciergeBell className="text-[#C6A85B]" size={28}/> },
     { label: "High Speed WiFi", icon: <Wifi className="text-[#C6A85B]" size={28}/> },
-    { label: "Executive Comfort", icon: <BedDouble className="text-[#C6A85B]" size={28}/> }
+    { label: "Prestige Comfort", icon: <BedDouble className="text-[#C6A85B]" size={28}/> }
   ];
 
   return (
