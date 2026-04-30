@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import RefreshButton from "@/app/components/RefreshButton"; 
 
 export default function ApartmentsPage() {
   const [units, setUnits] = useState<any[]>([]);
@@ -53,9 +54,15 @@ const fetchUnits = () => {
   return (
     <div>
 
-      <h1 className="text-2xl mb-6 text-[var(--carrington-gold)]">
-        Unit Availability
-      </h1>
+      <div className="flex items-center justify-between mb-6">
+
+        <h1 className="text-2xl text-[var(--carrington-gold)]">
+          Unit Availability
+        </h1>
+
+        <RefreshButton /> {/* ✅ NEW */}
+
+      </div>
 
       {/* GRID */}
       <div className="grid md:grid-cols-4 gap-4">

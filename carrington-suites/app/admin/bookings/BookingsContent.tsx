@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import RefreshButton from "@/app/components/RefreshButton"; 
+
 
 export default function BookingsPage() {
   const [bookings, setBookings] = useState<any[]>([]);
@@ -129,9 +131,15 @@ export default function BookingsPage() {
   return (
     <div>
 
-      <h1 className="text-2xl mb-6 text-[var(--carrington-gold)]">
+      <div className="flex items-center justify-between mb-6">
+
+        <h1 className="text-2xl mb-6 text-[var(--carrington-gold)]">
         Bookings Management
-      </h1>
+        </h1>
+
+          <RefreshButton /> {/* ✅ NEW */}
+
+        </div>
 
       {/* TOP BAR */}
       <div className="flex justify-between items-center mb-6 gap-4">

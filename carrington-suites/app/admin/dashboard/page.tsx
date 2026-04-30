@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import RefreshButton from "@/app/components/RefreshButton"; 
+
 
 import {
   BarChart,
@@ -65,10 +67,15 @@ export default function Dashboard() {
   return (
     <div>
 
+    <div className="flex items-center justify-between mb-6">
       {/* TITLE */}
       <h1 className="text-2xl mb-6 text-[var(--carrington-gold)]">
         Dashboard
       </h1>
+      
+      <RefreshButton /> {/* ✅ NEW */}
+
+    </div>
 
       {/* KPI CARDS (CLICKABLE) */}
       <div className="grid md:grid-cols-4 gap-6">

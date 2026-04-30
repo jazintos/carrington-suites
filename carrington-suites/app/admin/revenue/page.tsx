@@ -1,5 +1,6 @@
 'use client';
 
+import RefreshButton from "@/app/components/RefreshButton";
 import { useEffect, useState } from "react";
 
 export default function RevenuePage() {
@@ -15,11 +16,13 @@ export default function RevenuePage() {
 
   return (
     <div>
-
+      <div className="flex items-center justify-between mb-6">
       <h1 className="text-2xl mb-6 text-[var(--carrington-gold)]">
         Revenue Overview
       </h1>
-
+      <RefreshButton /> {/* ✅ NEW */}
+    </div>
+    
       {/* SUMMARY */}
       <div className="grid md:grid-cols-3 gap-6 mb-8">
 

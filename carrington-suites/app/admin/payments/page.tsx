@@ -1,5 +1,6 @@
 'use client';
 
+import RefreshButton from "@/app/components/RefreshButton";
 import { useEffect, useState } from "react";
 
 export default function PaymentsPage() {
@@ -31,9 +32,12 @@ export default function PaymentsPage() {
 
   return (
     <div>
+      <div className="flex items-center justify-between mb-6">
       <h1 className="text-2xl mb-6 text-[var(--carrington-gold)]">
-        Payments
+        Payments (Directly Form Paystack)
       </h1>
+      <RefreshButton /> {/* ✅ NEW */}
+    </div>
 
       <div className="admin-card overflow-x-auto">
         <table className="w-full text-sm">

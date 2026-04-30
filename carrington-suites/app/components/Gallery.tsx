@@ -12,27 +12,67 @@ import "yet-another-react-lightbox/plugins/captions.css";
 
 export default function Gallery() {
 
+  // 🔥 NEW: Structured slides from your folders
   const slides = [
+    // 🛋️ Living
     {
-      src: "/suite-modern-1.png",
-      title: "3-bed Premium Residence",
-      description: "Elegant living spaces designed for refined comfort."
+      src: "/gallery/living/living-0.jpg",
+      title: "Living Room",
+      description: "Spacious and elegantly styled living area."
     },
     {
-      src: "/suite-dark-1.png",
-      title: "2-bed PentHouse Residence",
-      description: "Luxury interiors crafted for a premium stay."
+      src: "/gallery/living/living-1.jpg",
+      title: "Modern Lounge",
+      description: "Designed for comfort and sophistication."
+    },
+
+    // 🍳 Kitchen
+    {
+      src: "/gallery/kitchen/kitchen-1a.jpg",
+      title: "Modern Kitchen",
+      description: "Fully equipped with premium appliances."
     },
     {
-      src: "/suite-wood-2.png",
-      title: "1-bed Penthouse Signature Residence",
-      description: "A private sanctuary in Victoria Island."
+      src: "/gallery/kitchen/kitchen-3.jpg",
+      title: "Kitchen Detail",
+      description: "Clean lines, refined finishes."
+    },
+
+    // 🛏️ Bedroom
+    {
+      src: "/gallery/bedroom/bedroom-2.jpg",
+      title: "Luxury Bedroom",
+      description: "A calm, private retreat."
     },
     {
-      src: "/tv-wall.png",
-      title: "Modern Interiors",
-      description: "Contemporary design with luxuriouscomfort."
-    }
+      src: "/gallery/bedroom/bedroom-deluxe.jpg",
+      title: "Deluxe Suite",
+      description: "Elevated comfort with premium styling."
+    },
+
+    // 🌇 Balcony / View
+    {
+      src: "/gallery/details/balcony-main-1.jpg",
+      title: "Balcony View",
+      description: "Waterfront views from your residence."
+    },
+    {
+      src: "/gallery/details/balcony-main-2.jpg",
+      title: "Outdoor Experience",
+      description: "Relax and unwind with scenic views."
+    },
+
+    // 👗 Lifestyle (your shoot)
+    {
+      src: "/gallery/lifestyle/lifestyle-portrait-1.jpg",
+      title: "Carrington Lifestyle",
+      description: "Where elegance meets everyday living."
+    },
+    {
+      src: "/gallery/lifestyle/lifestyle-portrait-2.jpg",
+      title: "Premium Experience",
+      description: "Curated living at its finest."
+    },
   ];
 
   const [open, setOpen] = useState(false);
@@ -51,16 +91,17 @@ export default function Gallery() {
 
       </div>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 px-6">
+      {/* 🔥 IMPROVED GRID */}
+      <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 px-6">
 
         {slides.map((img, i) => (
 
           <motion.div
             key={i}
-            className="relative overflow-hidden rounded group cursor-pointer"
+            className="relative overflow-hidden rounded-xl group cursor-pointer"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6, delay: i * 0.05 }}
             onClick={() => {
               setIndex(i);
               setOpen(true);
@@ -69,15 +110,20 @@ export default function Gallery() {
 
             <img
               src={img.src}
-              className="w-full h-[220px] md:h-[260px] object-cover group-hover:scale-110 transition duration-700"
+              className="w-full h-[200px] sm:h-[220px] md:h-[240px] object-cover group-hover:scale-110 transition duration-700"
               alt={img.title}
               loading="lazy"
             />
 
-            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+            {/* 🔥 BETTER OVERLAY */}
+            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex flex-col items-center justify-center text-center px-3">
 
-              <span className="text-white text-sm tracking-widest">
+              <span className="text-white text-xs tracking-widest mb-1">
                 VIEW
+              </span>
+
+              <span className="text-white text-sm font-medium">
+                {img.title}
               </span>
 
             </div>
@@ -88,13 +134,14 @@ export default function Gallery() {
 
       </div>
 
+      {/* 🔥 LIGHTBOX */}
       <Lightbox
         open={open}
         close={() => setOpen(false)}
         index={index}
         slides={slides}
         plugins={[Zoom, Captions]}
-        carousel={{ preload: 2 }}
+        carousel={{ preload: 3 }}
         animation={{ zoom: 500 }}
         controller={{ closeOnBackdropClick: true }}
       />
