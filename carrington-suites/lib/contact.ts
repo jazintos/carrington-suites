@@ -1,4 +1,5 @@
 export const businessContact = {
+  address: "8, Walter Carrington Crescent, Victoria Island, Lagos",
   phones: [
     { label: "+234 806 444 5188", href: "tel:+2348064445188" },
     { label: "+234 704 700 5518", href: "tel:+2347047005518" },

@@ -73,9 +73,7 @@ export default function Contact() {
               </h3>
 
               <p className="text-gray-900 leading-relaxed">
-                Walter Carrington Crescent<br />
-                Victoria Island<br />
-                Lagos, Nigeria
+                {businessContact.address}
               </p>
             </div>
 

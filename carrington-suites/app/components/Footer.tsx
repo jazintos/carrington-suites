@@ -67,7 +67,7 @@ export default function Footer() {
 
           <div className="space-y-3 text-gray-200">
 
-            <p>8, 9 and 10, Walter Carrington Crescent, Victoria Island, Lagos</p>
+            <p>{businessContact.address}</p>
 
             {businessContact.phones.map((phone) => (
               <a
