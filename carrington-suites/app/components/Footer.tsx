@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { businessContact } from "@/lib/contact";
 
 export default function Footer() {
   return (
@@ -68,15 +69,18 @@ export default function Footer() {
 
             <p>8, 9 and 10, Walter Carrington Crescent, Victoria Island, Lagos</p>
 
-            <a
-              href="tel:+2349030009716"
-              className="block hover:text-[#C6A85B] transition"
-            >
-              +234 903 000 9716
-            </a>
+            {businessContact.phones.map((phone) => (
+              <a
+                key={phone.href}
+                href={phone.href}
+                className="block whitespace-nowrap hover:text-[#C6A85B] transition"
+              >
+                {phone.label}
+              </a>
+            ))}
 
             <a
-              href="https://wa.me/2349030009716"
+              href={businessContact.whatsapp.url}
               className="block hover:text-[#C6A85B] transition"
             >
               WhatsApp Concierge

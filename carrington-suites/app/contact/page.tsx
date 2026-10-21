@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { businessContact } from "@/lib/contact";
 
 export default function Contact() {
   const [status, setStatus] = useState("");
@@ -84,9 +85,17 @@ export default function Contact() {
                 Phone
               </h3>
 
-              <p className="text-gray-900">
-                +234 903 847 7748
-              </p>
+              <div className="space-y-3 text-gray-900">
+                {businessContact.phones.map((phone) => (
+                  <a
+                    key={phone.href}
+                    href={phone.href}
+                    className="block whitespace-nowrap hover:text-[#C6A85B] transition"
+                  >
+                    {phone.label}
+                  </a>
+                ))}
+              </div>
             </div>
 
 
