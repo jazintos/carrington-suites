@@ -1,0 +1,14 @@
+{
+  "one-bedroom": {
+    "name": "One-Bedroom Penthouse Residence",
+    "price": 400000
+  },
+  "two-bedroom": {
+    "name": "Two-Bedroom Signature Penthouse",
+    "price": 500000
+  },
+  "three-bedroom": {
+    "name": "Three-Bedroom Premium Residence",
+    "price": 650000
+  }
+}

@@ -1,4 +1,5 @@
 "use client";
+import rackRates from "@/lib/rack-rates.json";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
@@ -11,8 +12,7 @@ export default function Apartments() {
   const apartments = [
     {
       name: "One-Bedroom Penthouse Residence",
-      originalPrice: 450000,
-      salePrice: 300000,
+      price: rackRates["one-bedroom"].price,
       image: "/suite-modern-1.png",
       link: "/apartments/one-bedroom",
       description:
@@ -20,8 +20,7 @@ export default function Apartments() {
     },
     {
       name: "Two-Bedroom Signature Penthouse",
-      originalPrice: 600000,
-      salePrice: 350000,
+      price: rackRates["two-bedroom"].price,
       image: "/suite-dark-1.png",
       link: "/apartments/two-bedroom",
       description:
@@ -29,8 +28,7 @@ export default function Apartments() {
     },
     {
       name: "Three-Bedroom Premium Residence",
-      originalPrice: 800000,
-      salePrice: 450000,
+      price: rackRates["three-bedroom"].price,
       image: "/suite-wood-1.png",
       link: "/apartments/three-bedroom", 
       description:
@@ -143,16 +141,8 @@ and understated elegance.
 
              <div className="mb-6">
 
-              <p className="text-gray-400 line-through text-sm">
-                ₦{apt.originalPrice.toLocaleString()} / Night
-              </p>
-
               <p className="font-semibold text-lg text-black">
-                ₦{apt.salePrice.toLocaleString()} / Night
-              </p>
-
-              <p className="text-xs text-[#C6A85B] mt-1 tracking-wide">
-                Limited Offer
+                ₦{apt.price.toLocaleString()} / Night
               </p>
 
               </div>

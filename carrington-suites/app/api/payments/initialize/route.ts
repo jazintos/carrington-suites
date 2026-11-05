@@ -25,12 +25,8 @@ export async function POST(req: Request) {
       );
     }
 
-    // ================= TEST MODE =================
-    const TEST_MODE = true;
-
-    const amount = TEST_MODE
-      ? 1000 // ₦10 (Paystack uses kobo)
-      : booking.totalPrice * 100;
+    // Charge the agreed stored total, including for existing pending bookings.
+    const amount = booking.totalPrice * 100;
 
     // ================= PAYSTACK REQUEST =================
     const paystackRes = await fetch(

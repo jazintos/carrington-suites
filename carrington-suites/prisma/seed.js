@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/no-require-imports -- Existing CommonJS seed; do not run against production. */
 const { PrismaClient } = require("@prisma/client");
+
+const rackRates = require("../lib/rack-rates.json");
 
 const prisma = new PrismaClient();
 
@@ -11,15 +14,15 @@ async function main() {
 
   // CREATE TYPES (UPDATED NAMES + PRICES)
   const threeBedroom = await prisma.apartmentType.create({
-    data: { name: "Three-Bedroom Premium Residence", price: 450000 },
+    data: { name: "Three-Bedroom Premium Residence", price: rackRates["three-bedroom"].price },
   });
 
   const twoBedroom = await prisma.apartmentType.create({
-    data: { name: "Two-Bedroom Signature Penthouse", price: 350000 },
+    data: { name: "Two-Bedroom Signature Penthouse", price: rackRates["two-bedroom"].price },
   });
 
   const oneBedroom = await prisma.apartmentType.create({
-    data: { name: "One-Bedroom Penthouse Residence", price: 300000 },
+    data: { name: "One-Bedroom Penthouse Residence", price: rackRates["one-bedroom"].price },
   });
 
 // CREATE UNITS

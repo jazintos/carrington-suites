@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import rackRates from "@/lib/rack-rates.json";
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
@@ -31,6 +32,10 @@ export async function POST(req: Request) {
 
     today.setHours(0, 0, 0, 0);
 
+    if (!Number.isFinite(checkInDate.getTime()) || !Number.isFinite(checkOutDate.getTime())) {
+      return NextResponse.json({ error: "Invalid booking dates." }, { status: 400 });
+    }
+
     if (checkInDate < today) {
       return NextResponse.json(
         { error: "Check-in date cannot be in the past." },
@@ -46,7 +51,7 @@ export async function POST(req: Request) {
     }
 
     // ================= 🔥 FLEXIBLE MATCH =================
-    const apartmentMap: any = {
+    const apartmentMap: Record<string, string> = {
       "one-bedroom": "One-Bedroom Penthouse Residence",
       "two-bedroom": "Two-Bedroom Signature Penthouse",
       "three-bedroom": "Three-Bedroom Premium Residence",
@@ -118,7 +123,16 @@ export async function POST(req: Request) {
       (checkOutDate.getTime() - checkInDate.getTime()) /
       (1000 * 60 * 60 * 24);
 
-    const totalPrice = nights * apartmentType.price;
+    if (!Number.isInteger(nights) || nights < 1) {
+      return NextResponse.json({ error: "Bookings require whole nights." }, { status: 400 });
+    }
+
+    // Resolve current rack rates on the server; never accept a client amount.
+    const rackRate = Object.values(rackRates).find(rate => rate.name === apartmentType.name);
+    if (!rackRate) {
+      return NextResponse.json({ error: "Invalid apartment type." }, { status: 400 });
+    }
+    const totalPrice = nights * rackRate.price;
 
     // ================= CREATE BOOKING =================
     const booking = await prisma.booking.create({

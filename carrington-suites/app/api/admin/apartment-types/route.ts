@@ -1,3 +1,4 @@
+import rackRates from "@/lib/rack-rates.json";
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
@@ -11,7 +12,10 @@ export async function GET() {
       },
     });
 
-    return NextResponse.json(types);
+    return NextResponse.json(types.map(type => ({
+      ...type,
+      price: Object.values(rackRates).find(rate => rate.name === type.name)?.price ?? type.price,
+    })));
 
   } catch (error) {
     console.error("APARTMENT TYPES ERROR:", error);

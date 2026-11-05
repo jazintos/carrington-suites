@@ -1,4 +1,5 @@
 "use client";
+import rackRates from "@/lib/rack-rates.json";
 
 import { BedDouble, Tv, Wifi, ParkingCircle, AirVent, CookingPot, ShieldCheck, Sparkles, Users } from "lucide-react";
 
@@ -59,16 +60,8 @@ export default function OneBedroomResidence() {
           {/* PRICING */}
           <div className="mt-8">
 
-            <p className="text-gray-300 line-through text-sm">
-              ₦450,000 / Night
-            </p>
-
             <p className="text-2xl md:text-3xl font-semibold">
-              ₦300,000 <span className="text-base font-normal">/ Night</span>
-            </p>
-
-            <p className="text-xs text-[#C6A85B] mt-1 tracking-wide">
-              Limited Offer
+              ₦{rackRates["one-bedroom"].price.toLocaleString()} <span className="text-base font-normal">/ Night</span>
             </p>
 
           </div>

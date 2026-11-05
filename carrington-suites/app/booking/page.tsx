@@ -1,4 +1,5 @@
 "use client";
+import rackRates from "@/lib/rack-rates.json";
 import { useState } from "react";
 
 export default function Booking() {
@@ -7,12 +8,6 @@ export default function Booking() {
   const [error, setError] = useState(""); // ✅ NEW
   const [bookingData, setBookingData] = useState<any>(null);
   const [pricePreview, setPricePreview] = useState<any>(null);
-
-  const PRICES: any = {
-    "one-bedroom": 300000,
-    "two-bedroom": 350000,
-    "three-bedroom": 450000,
-  };
 
   const calculatePrice = (apartment: string, checkin: string, checkout: string) => {
     if (!apartment || !checkin || !checkout) {
@@ -32,7 +27,7 @@ export default function Booking() {
       (checkOutDate.getTime() - checkInDate.getTime()) /
       (1000 * 60 * 60 * 24);
 
-    const pricePerNight = PRICES[apartment];
+    const pricePerNight = rackRates[apartment as keyof typeof rackRates]?.price;
     if (!pricePerNight) return;
 
     const total = nights * pricePerNight;
@@ -125,7 +120,11 @@ export default function Booking() {
               Booking Details
             </h2>
 
-            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <form onChange={(e) => {
+              const form = e.currentTarget;
+              const values = new FormData(form);
+              calculatePrice(String(values.get("apartment") || ""), String(values.get("checkin") || ""), String(values.get("checkout") || ""));
+            }} onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
               <input type="text" name="name" placeholder="Full Name" required className="border px-4 py-3" />
               <input type="email" name="email" placeholder="Email" required className="border px-4 py-3" />
@@ -134,21 +133,12 @@ export default function Booking() {
               <select
                 name="apartment"
                 required
-                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                  const form = e.currentTarget.form;
-                  if (!form) return;
-
-                  const checkin = (form.elements.namedItem("checkin") as HTMLInputElement)?.value;
-                  const checkout = (form.elements.namedItem("checkout") as HTMLInputElement)?.value;
-
-                  calculatePrice(e.currentTarget.value, checkin, checkout);
-                }}
                 className="border px-4 py-3"
               >
                 <option value="">Select Residence</option>
-                <option value="one-bedroom">One-Bedroom Penthouse Residence</option>
-                <option value="two-bedroom">Two-Bedroom Signature Penthouse</option>
-                <option value="three-bedroom">Three-Bedroom Premium Residence</option>
+                <option value="one-bedroom">One-Bedroom Penthouse Residence — ₦{rackRates["one-bedroom"].price.toLocaleString()} / Night</option>
+                <option value="two-bedroom">Two-Bedroom Signature Penthouse — ₦{rackRates["two-bedroom"].price.toLocaleString()} / Night</option>
+                <option value="three-bedroom">Three-Bedroom Premium Residence — ₦{rackRates["three-bedroom"].price.toLocaleString()} / Night</option>
               </select>
 
               {/* CHECK-IN */}

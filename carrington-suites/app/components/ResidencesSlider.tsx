@@ -1,12 +1,12 @@
 "use client";
+import rackRates from "@/lib/rack-rates.json";
 
 import { useState } from "react";
 
 const residences = [
   {
     name: "One-Bedroom Penthouse Residence",
-    originalPrice: 450000,
-    salePrice: 300000,
+    price: rackRates["one-bedroom"].price,
     description:
       "A refined private retreat designed for comfort, privacy, and effortless living.",
     image: "/suite-modern-1.png",
@@ -14,8 +14,7 @@ const residences = [
   },
   {
     name: "Two-Bedroom Signature Penthouse",
-    originalPrice: 600000,
-    salePrice: 350000,
+    price: rackRates["two-bedroom"].price,
     description:
       "Spacious, elegant, and perfectly suited for elevated shared living.",
     image: "/suite-dark-1.png",
@@ -23,8 +22,7 @@ const residences = [
   },
   {
     name: "Three-Bedroom Premium Residence",
-    originalPrice: 800000,
-    salePrice: 450000,
+    price: rackRates["three-bedroom"].price,
     description:
       "Expansive living designed for those who value space, privacy, and refined comfort.",
     image: "/suite-wood-1.png",
@@ -71,16 +69,8 @@ export default function ResidencesSlider() {
         {/* Pricing */}
         <div className="mb-4 md:mb-6">
 
-          <p className="text-gray-400 line-through text-xs md:text-sm">
-            ₦{residence.originalPrice.toLocaleString()} / Night
-          </p>
-
           <p className="text-lg md:text-xl text-black">
-            ₦{residence.salePrice.toLocaleString()} / Night
-          </p>
-
-          <p className="text-[10px] md:text-xs text-[#D4AF37] mt-1 tracking-wide">
-            Limited Offer
+            ₦{residence.price.toLocaleString()} / Night
           </p>
 
         </div>
